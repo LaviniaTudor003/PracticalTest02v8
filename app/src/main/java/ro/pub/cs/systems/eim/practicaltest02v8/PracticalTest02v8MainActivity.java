@@ -1,8 +1,10 @@
 package ro.pub.cs.systems.eim.practicaltest02v8;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,10 @@ public class PracticalTest02v8MainActivity extends AppCompatActivity {
 
     private EditText serverPortEditText;
     private Button startServerButton;
+    private EditText urlEditText;
+    private Button sendRequestButton;
+    public static TextView resultTextView;
+
     private ServerThread serverThread;
 
     @Override
@@ -20,21 +26,30 @@ public class PracticalTest02v8MainActivity extends AppCompatActivity {
 
         serverPortEditText = findViewById(R.id.server_port_edit_text);
         startServerButton = findViewById(R.id.start_server_button);
+        urlEditText = findViewById(R.id.url_edit_text);
+        sendRequestButton = findViewById(R.id.send_request_button);
+        resultTextView = findViewById(R.id.result_text_view);
 
         startServerButton.setOnClickListener(v -> {
-            String portString = serverPortEditText.getText().toString();
-
-            if (portString.isEmpty()) {
-                Toast.makeText(this, "Port required", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            int port = Integer.parseInt(portString);
+            int port = Integer.parseInt(serverPortEditText.getText().toString());
             serverThread = new ServerThread(port);
             serverThread.start();
 
-            Toast.makeText(this, "Server started on port " + port, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Server started", Toast.LENGTH_SHORT).show();
         });
-//        b) - trimiterea paginilor catre clienti care se conecteaza pe un port indicat de utilizator in interfata grafica(fie continut pagina, fie "URL blocked by firewall"
+
+        sendRequestButton.setOnClickListener(v -> {
+            String url = urlEditText.getText().toString();
+            int port = Integer.parseInt(serverPortEditText.getText().toString());
+
+            ClientThread clientThread =
+                    new ClientThread(
+                            "127.0.0.1",
+                            port,
+                            url,
+                            new Handler(getMainLooper())
+                    );
+            clientThread.start();
+        });
     }
 }

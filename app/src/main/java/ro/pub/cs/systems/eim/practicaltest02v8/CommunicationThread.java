@@ -46,7 +46,6 @@ public class CommunicationThread extends Thread {
                 return;
             }
 
-//Sa se implemneteze 
             URL url = new URL(urlString);
             HttpURLConnection connection =
                     (HttpURLConnection) url.openConnection();
