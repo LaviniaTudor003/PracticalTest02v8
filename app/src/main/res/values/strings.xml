@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PracticalTest02</string>
+
+    <string name="server">SERVER</string>
+    <string name="client">CLIENT</string>
+
+    <string name="server_port">Port</string>
+    <string name="connect">CONNECT</string>
+
+    <string name="client_address">Address</string>
+    <string name="client_port">Port</string>
+
+    <string name="city">City</string>
+    <string name="get_weather_forecast">GET WEATHER FORECAST</string>
+
+</resources>
