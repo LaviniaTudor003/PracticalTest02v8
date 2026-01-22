@@ -35,5 +35,6 @@ public class PracticalTest02v8MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Server started on port " + port, Toast.LENGTH_SHORT).show();
         });
+//        b) - trimiterea paginilor catre clienti care se conecteaza pe un port indicat de utilizator in interfata grafica(fie continut pagina, fie "URL blocked by firewall"
     }
 }
